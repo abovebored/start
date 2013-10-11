@@ -1,0 +1,19 @@
+@import url(normalize.css);
+@import url(simplegrid.css);
+
+::selection {background: ;}
+::-moz-selection {background: ;}
+
+body {
+	font-size: 62.5%;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+	color: #58595B;
+	background: #fff url(../img/bg.png) repeat-x 50% 76px;
+}
+#bla {
+	width: 960px;
+	margin: 0 auto;
+	text-align: left;
+	font-size: 1.4em;
+}
