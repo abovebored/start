@@ -5,10 +5,6 @@ Super simple starting point for quick, static web development - ~~no [LESS](http
 
 ## Requirements
 
-### Require.js
-*JS file/module loader*
-* http://requirejs.org/docs/download.html
-
 ### NPM
 *Node Packaged Modules*
 * http://nodejs.org/download/
