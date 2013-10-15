@@ -5,16 +5,16 @@ Super simple starting point for quick, static web development - ~~no [LESS](http
 
 ## Requirements
 
-## Require.js
+### Require.js
 *JS file/module loader*
 * http://requirejs.org/docs/download.html
 
-## NPM
+### NPM
 *Node Packaged Modules*
 * http://nodejs.org/download/
 * https://npmjs.org/
 
-## Grunt
+### Grunt
 *Grunt is used as a "build system", for concatenation and minification of javascript and css.*
 * http://gruntjs.com/
 
