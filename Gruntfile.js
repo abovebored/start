@@ -53,10 +53,10 @@ module.exports = function (grunt) {
 		// Minify the JS
 		uglify: {
 			yourTask : {
-				options: {
-					beautify: true,
-					comments: true
-				},
+				// Useful for debuging...
+				//options: {
+				//	beautify: true
+				//},
 				files: {
 					// Forces the correct loading of the master library first
 					'assets/min/plugins.min.js': ['!assets/js/lib/modernizer.min.js', 'assets/js/lib/jquery.js', 'assets/js/lib/*.js'],
