@@ -19,13 +19,13 @@ Super simple starting point for quick, static web development - ~~no [LESS](http
 * http://gruntjs.com/
 
 ### Includes
-[grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
-[grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
-[grunt-contrib-sass](https://github.com/gruntjs/grunt-contrib-sass)
-[grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
-[grunt-contrib-cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
-[grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
-[grunt-strip](https://github.com/jsoverson/grunt-strip)
+* [grunt-contrib-clean](https://github.com/gruntjs/grunt-contrib-clean)
+* [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
+* [grunt-contrib-sass](https://github.com/gruntjs/grunt-contrib-sass)
+* [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)
+* [grunt-contrib-cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
+* [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
+* [grunt-strip](https://github.com/jsoverson/grunt-strip)
 
 ## Usage (see [Gruntfile.js](Gruntfile.js))
 * To force a complie of everything simply, run `grunt`
