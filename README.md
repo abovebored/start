@@ -23,7 +23,14 @@ Super simple starting point for quick, static web development - ~~no [LESS](http
 * [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 * [grunt-strip](https://github.com/jsoverson/grunt-strip)
 
+## Install
+
+1. Download and install Node.js — http://nodejs.org/download/
+2. Navigate to your project directory e.g., `cd ~/Projects/Example/`
+3. Run `npm install`
+
 ## Usage (see [Gruntfile.js](Gruntfile.js))
+
 * To force a complie of everything simply, run `grunt`
 * To automatically watch for changes on all CSS, SCSS and JS files and complie accordingly, run `grunt watch`
 
