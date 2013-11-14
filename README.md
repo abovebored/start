@@ -28,6 +28,7 @@ Super simple starting point for quick, static web development - ~~no [LESS](http
 1. Download and install Node.js — http://nodejs.org/download/
 2. Navigate to your project directory e.g., `cd ~/Projects/Example/`
 3. Run `npm install`
+4. Run `gem install sass`
 
 ## Usage (see [Gruntfile.js](Gruntfile.js))
 
