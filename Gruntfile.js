@@ -31,6 +31,9 @@ module.exports = function (grunt) {
 		// Processes the SASS CSS files, no minification
 		sass: {
 			dist: {
+				options: {
+					sourcemap: true
+				},
 				files: {
 					'assets/css/main.css': 'assets/sass/main.scss'
 				}
@@ -53,13 +56,13 @@ module.exports = function (grunt) {
 		// Minify the JS
 		uglify: {
 			yourTask : {
-				// Useful for debuging...
 				//options: {
-				//	beautify: true
+					//beautify: true,
+					//sourceMap: true
 				//},
 				files: {
 					// Forces the correct loading of the master library first
-					'assets/min/plugins.min.js': ['!assets/js/lib/modernizer.min.js', 'assets/js/lib/jquery.js', 'assets/js/lib/*.js'],
+					'assets/min/plugins.min.js': ['assets/js/lib/jquery.js', 'assets/js/lib/*.js', '!assets/js/lib/modernizer.min.js'],
 					'assets/min/main.min.js': ['assets/js/main.js']
 				}
 			}
