@@ -1,30 +1,47 @@
 module.exports = function (grunt) {
+	// Outputs the time taken to run each task
+	require('time-grunt')(grunt);
+
+	var jsFiles = [
+		'frontend/src/*.js',
+		'frontend/src/**/*.js'
+	];
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		// Run specific tasks when the source files change (currently any SCSS, CSS or JS file)
-		watch: {
-			css: {
-				files: ['assets/css/*.css', 'assets/sass/*.scss'],
-				tasks: ['build:css'],
-				options: {
-					spawn: false
-				}
-			},
-			js: {
-				files: ['assets/js/*.js', 'assets/js/*/*.js'],
-				tasks: ['build:js'],
-				options: {
-					spawn: false
+		// Browserify
+		browserify: {
+			options: {
+		 		browserifyOptions: {
+					debug: true,
+					list: true
+				},
+				transform: ['require-globify']
+		   },
+			dist: {
+				files: {
+					'public/assets/js/main.js': jsFiles
 				}
 			}
 		},
 
-		// Cleans the min folder when called
+		// Run specific tasks when the source files change (currently any SCSS, CSS or JS file)
+		watch: {
+			css: {
+				files: ['frontend/sass/**/*.scss'],
+				tasks: ['build:css']
+			},
+			js: {
+				files: jsFiles,
+				tasks: ['build:js']
+			}
+		},
+
+		// Cleans the output folders when called
 		clean: {
 			build: {
-				src: ['assets/min/*']
+				src: ['public/assets/js/*', 'public/assets/css/*']
 			}
 		},
 
@@ -32,38 +49,43 @@ module.exports = function (grunt) {
 		sass: {
 			dist: {
 				options: {
-					sourcemap: true
+					sourceMap: true
 				},
 				files: {
-					'assets/css/main.css': 'assets/sass/main.scss'
+					'public/assets/css/main.css': 'frontend/sass/main.scss'
 				}
 			}
 		},
 
-		// Uses 'clean-css' to minify
-		cssmin: {
-			add_banner: {
-				options: {
-					banner: '/* Source: assets/css/main.css */',
-					keepSpecialComments: 0
-				},
+		// Processes CSS files
+		postcss: {
+			options: {
+				map: true,
+				processors: [
+					require('postcss-import')(),
+					require('autoprefixer')({browsers: ['> 1%']})
+				]
+			},
+			dist: {
 				files: {
-					'assets/min/main.min.css': ['assets/css/main.css']
+					'public/assets/css/main.min.css': ['public/assets/css/*.css']
+				}
+			}
+		},
+
+		cssmin: {
+			target: {
+				files: {
+			 	 'public/assets/css/main.min.css': ['public/assets/css/main.min.css']
 				}
 			}
 		},
 
 		// Minify the JS
 		uglify: {
-			yourTask : {
-				//options: {
-					//beautify: true,
-					//sourceMap: true
-				//},
+			dist: {
 				files: {
-					// Forces the correct loading of the master library first
-					'assets/min/plugins.min.js': ['assets/js/lib/jquery.js', 'assets/js/lib/*.js', '!assets/js/lib/modernizer.min.js'],
-					'assets/min/main.min.js': ['assets/js/main.js']
+					'public/assets/js/main.min.js': ['public/assets/js/main.js']
 				}
 			}
 		},
@@ -71,25 +93,41 @@ module.exports = function (grunt) {
 		// Helps to detect errors and potential problems in JS
 		jshint: {
 			all: [
-				'Gruntfile.js', 'assets/js/*.js',
-				'!' + 'assets/js/main.min.js'
+				'Gruntfile.js', 'frontend/src/*.js'
 			]
+		},
+
+		// Notifications to OS
+		notify: {
+			css: {
+				options: {
+					message: '✅ CSS compliled & minified'
+				}
+			},
+			js: {
+				options: {
+					message: '✅ JS compliled & minified'
+				}
+			}
 		}
 	});
 
 	// Load tasks (see package.json)
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-strip');
+	grunt.loadNpmTasks('grunt-postcss');
+	grunt.loadNpmTasks('grunt-browserify');
+	grunt.loadNpmTasks('grunt-notify');
 
 	// Register terminal commands
-	grunt.registerTask('build', ['clean', 'uglify', 'lint', 'sass', 'cssmin']);
-	grunt.registerTask('build:css', ['sass', 'cssmin']);
-	grunt.registerTask('build:js', ['uglify']);
+	grunt.registerTask('build', ['clean', 'browserify', 'uglify', 'lint', 'sass', 'postcss', 'cssmin']);
+	grunt.registerTask('build:css', ['sass', 'postcss', 'cssmin', 'notify:css']);
+	//grunt.registerTask('build:js', ['lint', 'browserify', 'uglify', 'notify:js']);
+	grunt.registerTask('build:js', ['lint', 'browserify', 'notify:js']);
 	grunt.registerTask('lint', ['jshint']);
 	grunt.registerTask('default', ['build']);
 };
