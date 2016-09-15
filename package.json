@@ -1,8 +1,8 @@
 {
-  "name": "LooksgreatWeb",
+  "name": "Title",
   "version": "0.0.0",
-  "description": "Web interface for looksgreat.",
-  "author": "DADI <team@dadi.tech>",
+  "description": "",
+  "author": "",
   "dependencies": {
     "balloon-css": "^0.2.4",
     "browserify": "13.0.0",
